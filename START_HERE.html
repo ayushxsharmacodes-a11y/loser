@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>START LOSER - AAA Cinematic Game Experience</title>
+  <style>
+    body {
+      background: #06060a;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+    }
+    .card {
+      background: #10121d;
+      border: 1px solid #ff1e42;
+      border-radius: 12px;
+      max-width: 580px;
+      padding: 40px 30px;
+      box-shadow: 0 0 50px rgba(255, 30, 66, 0.35);
+    }
+    h1 {
+      font-size: 2.8rem;
+      letter-spacing: 0.25em;
+      margin: 0 0 10px 0;
+      color: #fff;
+    }
+    h1 span { color: #ff1e42; }
+    p {
+      color: #9ea7bd;
+      line-height: 1.6;
+      font-size: 1.05rem;
+      margin-bottom: 25px;
+    }
+    .btn {
+      display: inline-block;
+      background: linear-gradient(135deg, #ff1e42, #b3001f);
+      color: #fff;
+      text-decoration: none;
+      padding: 16px 36px;
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      border-radius: 6px;
+      box-shadow: 0 0 30px rgba(255, 30, 66, 0.6);
+      transition: transform 0.2s;
+    }
+    .btn:hover {
+      transform: scale(1.05);
+    }
+    .phone-box {
+      margin-top: 35px;
+      background: #171a2a;
+      border-radius: 8px;
+      padding: 20px;
+      border-left: 4px solid #00f0ff;
+      text-align: left;
+    }
+    .phone-box h3 {
+      margin: 0 0 8px 0;
+      color: #00f0ff;
+      font-size: 1.1rem;
+    }
+    .phone-box code {
+      display: block;
+      background: #090b14;
+      padding: 10px 14px;
+      color: #ff9100;
+      font-size: 1.15rem;
+      font-weight: bold;
+      border-radius: 4px;
+      margin: 10px 0;
+      word-break: break-all;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>L<span>Ø</span>SER</h1>
+    <p>
+      Modern browsers (Chrome, Edge, Safari) block 3D WebGL, custom audio tracks, and security tokens when opening raw <code>file://</code> files.
+      <br><br>
+      Your high-performance local game server is ready!
+    </p>
+
+    <a href="http://localhost:5173/" class="btn">🚀 OPEN TRAILER WEBSITE NOW</a>
+
+    <div class="phone-box">
+      <h3>📱 HOW TO OPEN ON YOUR PHONE:</h3>
+      <p style="margin-bottom: 8px; font-size: 0.95rem;">
+        1. Connect your phone to the <strong>same Wi-Fi network</strong> as your PC.<br>
+        2. Open Safari or Chrome on your phone and go to:
+      </p>
+      <code>http://10.180.220.108:5173/</code>
+      <p style="margin: 0; font-size: 0.85rem; color: #727b95;">
+        (Or run <strong>LAUNCH_GAME.bat</strong> anytime to see your live local address).
+      </p>
+    </div>
+  </div>
+
+  <script>
+    // Automatic redirect after 2 seconds if opened in browser
+    setTimeout(() => {
+      window.location.href = "http://localhost:5173/";
+    }, 1800);
+  </script>
+</body>
+</html>
