@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LOSER - GTA Style AAA Cinematic Game Experience</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>" />
+  <script type="module" crossorigin src="/assets/index-Dmi9_wHM.js"></script>
+  <link rel="stylesheet" crossorigin href="/assets/index-DAxmhfy7.css">
+</head>
+<body class="cinematic-mode">
+  <!-- 3D WebGL Background Canvas -->
+  <canvas id="webgl-canvas"></canvas>
+
+  <!-- Cinematic Anamorphic Letterbox Bars -->
+  <div class="letterbox-top"></div>
+  <div class="letterbox-bottom"></div>
+
+  <!-- Post-Processing Overlays -->
+  <div class="film-grain"></div>
+  <div class="vignette"></div>
+  <div class="scanlines"></div>
+  <div id="flash-fx" style="position:fixed; top:0; left:0; width:100vw; height:100vh; background:#fff; z-index:90; opacity:0; pointer-events:none; transition:opacity 0.08s ease;"></div>
+
+  <!-- UI Overlay Layer -->
+  <div id="ui-root">
+    <!-- Top Navigation -->
+    <header class="top-nav">
+      <div class="logo-container interactive" id="btn-home">
+        <div class="brand-badge">PRO_GAME STUDIOS</div>
+        <div class="title-logo">L<span>Ø</span>SER</div>
+      </div>
+
+      <div class="hud-pill">
+        <span class="dot alert"></span>
+        <span id="nav-mission-tag">OPERATION BLACKOUT // STRATOSPHERE 35,000 FT</span>
+      </div>
+
+      <div class="nav-actions">
+        <button class="btn-secondary interactive" id="btn-open-dossier">
+          <i data-lucide="shield-alert"></i>
+          <span>AGENT DOSSIER</span>
+        </button>
+        <button class="btn-primary interactive" id="btn-replay">
+          <i data-lucide="play"></i>
+          <span>PLAY TRAILER</span>
+        </button>
+      </div>
+    </header>
+
+    <!-- Center Stage (Subtitles, QTE, End Title) -->
+    <main class="center-stage">
+      <!-- Left HUD Telemetry -->
+      <aside class="hud-telemetry">
+        <div class="hud-card">
+          <div class="label">ALTITUDE</div>
+          <div class="val" id="hud-altitude">35,000 FT</div>
+        </div>
+        <div class="hud-card">
+          <div class="label">AIRSPEED</div>
+          <div class="val" id="hud-speed">520 KTS</div>
+        </div>
+        <div class="hud-card warning">
+          <div class="label">AGENT HEART RATE</div>
+          <div class="val" id="hud-heart">48 BPM [CALM]</div>
+        </div>
+      </aside>
+
+      <!-- Right HUD Target Status -->
+      <aside class="hud-target">
+        <div class="target-box">
+          <div class="label" style="font-size:0.65rem; color:#8892a5;">MISSION PROTOCOL</div>
+          <div class="val" id="hud-status" style="font-size:1rem; font-weight:800; color:#ff9100;">TARGET ACQUIRED</div>
+        </div>
+      </aside>
+
+      <!-- Subtitles & Narration Display -->
+      <div class="cinema-subtitles" id="subtitles-box">
+        <div class="speaker-badge" id="speaker-badge">CLASSIFIED DOSSIER</div>
+        <div class="subtitle-text" id="subtitle-text">
+          "They called him a ghost. An outcast. They called him... 'Loser'."
+        </div>
+      </div>
+
+      <!-- Climax Interactive QTE Detonator Overlay -->
+      <div class="qte-container interactive" id="qte-container">
+        <div class="detonator-ring" id="detonator-btn" title="Click or Press Space">
+          <div class="detonator-pulse"></div>
+          <span class="detonator-icon">💥</span>
+        </div>
+        <div class="qte-prompt-text">
+          PRESS [SPACE] OR CLICK TO BREAK CHAINS &amp; DETONATE
+        </div>
+      </div>
+
+      <!-- Final Title Screen / End Card -->
+      <section class="title-reveal-screen" id="title-reveal-screen">
+        <h1 class="reveal-heading">L Ø S E R</h1>
+        <div class="reveal-tagline">"HE WON. BUT AT WHAT COST?"</div>
+        <div class="coming-soon-badge">COMING SOON</div>
+
+        <div class="reveal-actions">
+          <button class="btn-primary interactive" id="btn-wishlist">
+            <i data-lucide="bookmark-plus"></i>
+            <span>WISHLIST ON STEAM</span>
+          </button>
+          <button class="btn-secondary interactive" id="btn-replay-reveal">
+            <i data-lucide="rotate-ccw"></i>
+            <span>REPLAY TRAILER</span>
+          </button>
+          <button class="btn-secondary interactive" id="btn-dossier-reveal">
+            <i data-lucide="users"></i>
+            <span>VIEW CHARACTERS</span>
+          </button>
+        </div>
+
+        <div class="platform-badges">
+          <span>PLAYSTATION 5</span>
+          <span>•</span>
+          <span>XBOX SERIES X|S</span>
+          <span>•</span>
+          <span>STEAM PC</span>
+          <span>•</span>
+          <span>4K 120 FPS</span>
+        </div>
+      </section>
+    </main>
+
+    <!-- Bottom Director & Audio Controller Bar -->
+    <footer class="bottom-dock">
+      <!-- Timeline Scrubber Track -->
+      <div class="timeline-track-wrap interactive">
+        <div class="timeline-header">
+          <span id="time-current">00:00</span>
+          <span style="color:#ff1e42; font-weight:bold;">CINEMATIC TIMELINE // DIRECTORS SCRUBBER</span>
+          <span id="time-duration">02:50</span>
+        </div>
+        <div class="timeline-progress-bar" id="timeline-bar">
+          <div class="timeline-fill" id="timeline-fill"></div>
+          <!-- Scene Markers -->
+          <div class="scene-marker" style="left: 0%;" title="Prologue"><span class="scene-marker-label">PROLOGUE</span></div>
+          <div class="scene-marker" style="left: 10%;" title="Car Chase"><span class="scene-marker-label">CHASE</span></div>
+          <div class="scene-marker" style="left: 23%;" title="Penthouse Combat"><span class="scene-marker-label">COMBAT</span></div>
+          <div class="scene-marker" style="left: 36%;" title="35,000 FT Plane"><span class="scene-marker-label">CARGO PLANE</span></div>
+          <div class="scene-marker" style="left: 55%;" title="The Smile"><span class="scene-marker-label">THE SMILE</span></div>
+          <div class="scene-marker" style="left: 72%;" title="Detonation"><span class="scene-marker-label">DETONATION</span></div>
+          <div class="scene-marker" style="left: 88%;" title="Freefall"><span class="scene-marker-label">FREEFALL</span></div>
+        </div>
+      </div>
+
+      <!-- Dock Controls (Audio, Visualizer, Director Tools) -->
+      <div class="dock-controls">
+        <div class="playback-controls interactive">
+          <button class="play-pause-btn" id="btn-play-pause">
+            <i data-lucide="play" id="play-icon"></i>
+          </button>
+          <div class="audio-track-info">
+            <i data-lucide="music" style="color:var(--primary-red);"></i>
+            <div>TRACK: <span>TAME IMPALA - LOSER</span> [ORIGINAL AUDIO]</div>
+          </div>
+        </div>
+
+        <!-- Real-Time Audio Visualizer Canvas -->
+        <div class="visualizer-box">
+          <canvas id="audio-visualizer"></canvas>
+          <button class="director-btn interactive" id="btn-bass-boost" title="Toggle Sub-Bass Punch">
+            <i data-lucide="zap"></i>
+            <span>BASS PUNCH: ON</span>
+          </button>
+        </div>
+
+        <!-- Director Quick Toggles -->
+        <div class="director-actions interactive">
+          <button class="director-btn" id="btn-slowmo">
+            <i data-lucide="gauge"></i>
+            <span id="slowmo-label">1.0x SPEED</span>
+          </button>
+          <button class="director-btn" id="btn-freecam">
+            <i data-lucide="camera"></i>
+            <span>FREE LOOK</span>
+          </button>
+          <button class="director-btn" id="btn-filter">
+            <i data-lucide="palette"></i>
+            <span id="filter-label">CYBER HDR</span>
+          </button>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <!-- Character Dossier Modal -->
+  <div class="modal-overlay" id="dossier-modal">
+    <div class="modal-content interactive">
+      <div class="modal-header">
+        <div class="modal-title">
+          <i data-lucide="shield"></i>
+          <span>PROJECT 'LOSER' // <span>OPERATIVE DOSSIER</span></span>
+        </div>
+        <button class="modal-close-btn" id="btn-close-dossier">&times;</button>
+      </div>
+
+      <div class="character-tabs" id="char-tabs">
+        <!-- Rendered dynamically -->
+      </div>
+
+      <div class="modal-body" id="modal-body">
+        <div class="char-portrait-card" id="char-portrait-container">
+          <!-- Rendered dynamically -->
+        </div>
+        <div class="char-details" id="char-details-container">
+          <!-- Rendered dynamically -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Initial User Gesture & Sound Start Prompt -->
+  <div class="sound-overlay" id="sound-overlay">
+    <div class="start-trailer-card">
+      <div class="brand-badge">ROCKSTAR / PRO_GAME PRESENTS</div>
+      <h1 class="start-trailer-title">L<span>Ø</span>SER</h1>
+      <p class="start-trailer-desc">
+        Experience the next-generation cinematic game trailer. Featuring high-octane hypercar chases, rooftop gun-kata, the 35,000 ft cargo plane standoff, and the apocalyptic Demon Slayer blast.
+        <br /><br />
+        <strong style="color:#ff1e42;">Best experienced with headphones on for 24-bit 3D sound.</strong>
+      </p>
+      <button class="start-play-btn" id="btn-start-experience">
+        <i data-lucide="play-circle"></i>
+        <span>ENTER THE EXPERIENCE</span>
+      </button>
+    </div>
+  </div>
+
+</body>
+</html>
